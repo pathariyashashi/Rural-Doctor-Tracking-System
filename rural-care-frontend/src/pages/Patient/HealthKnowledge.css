@@ -1,0 +1,882 @@
+/* ===================================================
+   RURAL DOCTOR CARE - HEALTH KNOWLEDGE CENTER
+   Industry Level Responsive CSS (Part 1/3)
+=================================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",sans-serif;
+}
+
+:root{
+  --primary:#2563EB;
+  --primary-dark:#1D4ED8;
+  --orange:#EA580C;
+  --red:#DC2626;
+  --white:#FFFFFF;
+  --bg:#F4F8FF;
+  --text:#1E293B;
+  --gray:#64748B;
+}
+
+.knowledge-page{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  padding:26px;
+  transition:.35s ease;
+}
+
+.knowledge-page.dark{
+  background:#0F172A;
+  color:white;
+}
+
+/* ================= HEADER ================= */
+
+.knowledge-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+  margin-bottom:28px;
+}
+
+.knowledge-header h2{
+  font-size:34px;
+  font-weight:700;
+  color:var(--primary);
+}
+
+.knowledge-header p{
+  color:var(--gray);
+  margin-top:6px;
+}
+
+.knowledge-page.dark .knowledge-header p{
+  color:#CBD5E1;
+}
+
+.theme-btn{
+  width:48px;
+  height:48px;
+  border:none;
+  border-radius:50%;
+  background:linear-gradient(135deg,#2563EB,#1D4ED8);
+  color:white;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.theme-btn:hover{
+  transform:rotate(25deg) scale(1.05);
+}
+
+/* ================= HERO ================= */
+
+.hero-banner{
+  background:linear-gradient(135deg,#2563EB,#1E40AF);
+  border-radius:28px;
+  padding:38px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+  color:white;
+  margin-bottom:35px;
+  box-shadow:0 20px 40px rgba(37,99,235,.25);
+}
+
+.hero-content{
+  flex:1;
+  min-width:280px;
+}
+
+.hero-badge{
+  display:inline-block;
+  background:rgba(255,255,255,.15);
+  padding:8px 16px;
+  border-radius:50px;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:18px;
+}
+
+.hero-content h1{
+  font-size:42px;
+  margin-bottom:14px;
+  line-height:1.2;
+}
+
+.hero-content p{
+  font-size:17px;
+  line-height:1.7;
+  max-width:520px;
+  margin-bottom:22px;
+}
+
+.hero-btn{
+  background:white;
+  color:var(--primary);
+  border:none;
+  border-radius:14px;
+  padding:14px 22px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  transition:.3s;
+}
+
+.hero-btn:hover{
+  transform:translateY(-3px);
+}
+
+.hero-icon{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.15);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* ================= SEARCH ================= */
+
+.search-box{
+  background:white;
+  border-radius:18px;
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:35px;
+}
+
+.knowledge-page.dark .search-box{
+  background:#1E293B;
+}
+
+.search-box svg{
+  color:var(--primary);
+}
+
+.search-box input{
+  flex:1;
+  border:none;
+  outline:none;
+  background:transparent;
+  font-size:16px;
+  color:#111827;
+}
+
+.knowledge-page.dark .search-box input{
+  color:white;
+}
+
+.search-box input::placeholder{
+  color:#94A3B8;
+}
+
+/* ================= SECTION TITLE ================= */
+
+.section-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:26px;
+  font-weight:700;
+  color:var(--primary-dark);
+  margin-bottom:22px;
+  margin-top:10px;
+}
+
+.knowledge-page.dark .section-title{
+  color:#93C5FD;
+}
+
+/* ================= CATEGORY GRID ================= */
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:20px;
+  margin-bottom:40px;
+}
+
+.category-card{
+  background:white;
+  border-radius:22px;
+  padding:24px 18px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  border-top:5px solid var(--primary);
+}
+
+.knowledge-page.dark .category-card{
+  background:#1E293B;
+}
+
+.category-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 18px 35px rgba(37,99,235,.15);
+}
+
+.category-card span{
+  font-size:42px;
+  display:block;
+  margin-bottom:12px;
+}
+
+.category-card h4{
+  color:var(--primary);
+  font-size:17px;
+  font-weight:600;
+}
+
+/* ================= EMERGENCY CARDS ================= */
+
+.emergency-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+  margin-bottom:45px;
+}
+
+.emergency-card{
+  border-radius:22px;
+  padding:24px;
+  color:white;
+  box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+.emergency-card h4{
+  font-size:20px;
+  margin-bottom:14px;
+}
+
+.emergency-card ul{
+  padding-left:18px;
+}
+
+.emergency-card li{
+  margin-bottom:10px;
+  line-height:1.6;
+}
+
+.red{
+  background:linear-gradient(135deg,#DC2626,#991B1B);
+}
+
+.orange{
+  background:linear-gradient(135deg,#F97316,#C2410C);
+}
+
+.blue{
+  background:linear-gradient(135deg,#2563EB,#1E40AF);
+}
+
+/* ===================================================
+   HEALTH KNOWLEDGE CSS — PART 2/3
+   Disease Cards + Nutrition + Women + Medicine
+=================================================== */
+
+/* ================= DISEASE GRID ================= */
+
+.disease-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:26px;
+  margin-bottom:45px;
+}
+
+.disease-card{
+  background:#fff;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  transition:.35s ease;
+  border:1px solid #E2E8F0;
+}
+
+.knowledge-page.dark .disease-card{
+  background:#1E293B;
+  border-color:#334155;
+}
+
+.disease-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 22px 35px rgba(37,99,235,.15);
+}
+
+.disease-image{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.disease-body{
+  padding:22px;
+}
+
+.disease-category{
+  display:inline-block;
+  background:#DBEAFE;
+  color:#1D4ED8;
+  padding:6px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:12px;
+}
+
+.knowledge-page.dark .disease-category{
+  background:#1E40AF;
+  color:#DBEAFE;
+}
+
+.disease-body h3{
+  font-size:24px;
+  color:#2563EB;
+  margin-bottom:18px;
+  line-height:1.4;
+}
+
+.disease-section{
+  margin-bottom:18px;
+}
+
+.disease-section h4{
+  color:#EA580C;
+  font-size:16px;
+  margin-bottom:10px;
+}
+
+.disease-section ul{
+  padding-left:22px;
+}
+
+.disease-section li{
+  margin-bottom:8px;
+  color:#475569;
+  line-height:1.6;
+}
+
+.knowledge-page.dark .disease-section li{
+  color:#CBD5E1;
+}
+
+/* Warning Box */
+
+.warning-box{
+  margin-top:18px;
+  background:#FEF2F2;
+  border-left:5px solid #DC2626;
+  border-radius:14px;
+  padding:15px;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.warning-box svg{
+  color:#DC2626;
+  flex-shrink:0;
+}
+
+.warning-box p{
+  color:#991B1B;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.knowledge-page.dark .warning-box{
+  background:#3F1D1D;
+}
+
+.knowledge-page.dark .warning-box p{
+  color:#FECACA;
+}
+
+/* ================= NUTRITION ================= */
+
+.nutrition-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
+  margin-bottom:45px;
+}
+
+.nutrition-card{
+  background:#fff;
+  border-radius:22px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  transition:.3s;
+}
+
+.knowledge-page.dark .nutrition-card{
+  background:#1E293B;
+}
+
+.nutrition-card:hover{
+  transform:translateY(-6px);
+}
+
+.nutrition-card svg{
+  margin-bottom:14px;
+}
+
+.nutrition-card h4{
+  color:#EA580C;
+  font-size:18px;
+  margin-bottom:10px;
+}
+
+.nutrition-card p{
+  color:#475569;
+  line-height:1.6;
+}
+
+.knowledge-page.dark .nutrition-card p{
+  color:#CBD5E1;
+}
+
+/* ================= WOMEN & CHILD ================= */
+
+.women-card{
+  background:#fff;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  margin-bottom:45px;
+}
+
+.knowledge-page.dark .women-card{
+  background:#1E293B;
+}
+
+.info-box{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding:20px 0;
+  border-bottom:1px solid #E5E7EB;
+}
+
+.info-box:last-child{
+  border-bottom:none;
+}
+
+.knowledge-page.dark .info-box{
+  border-color:#334155;
+}
+
+.info-box svg{
+  background:#EFF6FF;
+  padding:10px;
+  border-radius:50%;
+  width:54px;
+  height:54px;
+}
+
+.knowledge-page.dark .info-box svg{
+  background:#1E40AF;
+}
+
+.info-box h4{
+  color:#2563EB;
+  font-size:18px;
+  margin-bottom:6px;
+}
+
+.info-box p{
+  color:#475569;
+  line-height:1.7;
+}
+
+.knowledge-page.dark .info-box p{
+  color:#CBD5E1;
+}
+
+/* ================= MEDICINE SECTION ================= */
+
+.medicine-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
+  margin-bottom:45px;
+}
+
+.medicine-card{
+  background:#fff;
+  border-radius:22px;
+  padding:24px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+  transition:.3s;
+}
+
+.knowledge-page.dark .medicine-card{
+  background:#1E293B;
+}
+
+.medicine-card:hover{
+  transform:translateY(-6px);
+}
+
+.medicine-icon{
+  width:70px;
+  height:70px;
+  margin:auto;
+  margin-bottom:16px;
+  background:#DBEAFE;
+  color:#2563EB;
+  font-size:34px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.knowledge-page.dark .medicine-icon{
+  background:#1E40AF;
+  color:#fff;
+}
+
+.medicine-card h4{
+  color:#2563EB;
+  margin-bottom:10px;
+  font-size:18px;
+}
+
+.medicine-card p{
+  color:#475569;
+  line-height:1.6;
+}
+
+.knowledge-page.dark .medicine-card p{
+  color:#CBD5E1;
+}
+
+/* ===================================================
+   HEALTH KNOWLEDGE CSS — PART 3/3 FINAL
+   Tips + Help + Responsive + Animations
+=================================================== */
+
+/* ================= DAILY HEALTH TIPS ================= */
+
+.tips-card{
+  background:linear-gradient(135deg,#DBEAFE,#EFF6FF);
+  border-radius:24px;
+  padding:30px;
+  margin-bottom:40px;
+  box-shadow:0 10px 25px rgba(37,99,235,.08);
+}
+
+.knowledge-page.dark .tips-card{
+  background:#1E3A8A;
+}
+
+.tips-card h3{
+  color:#1E40AF;
+  font-size:24px;
+  margin-bottom:20px;
+}
+
+.knowledge-page.dark .tips-card h3{
+  color:#fff;
+}
+
+.tips-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+}
+
+.tip-item{
+  background:#fff;
+  padding:16px 18px;
+  border-radius:16px;
+  font-size:15px;
+  font-weight:500;
+  color:#334155;
+  transition:.3s;
+  box-shadow:0 6px 15px rgba(0,0,0,.05);
+}
+
+.tip-item:hover{
+  transform:translateY(-4px);
+}
+
+.knowledge-page.dark .tip-item{
+  background:#0F172A;
+  color:#E2E8F0;
+}
+
+/* ================= HELP CENTER ================= */
+
+.help-card{
+  background:#fff;
+  border-radius:24px;
+  padding:28px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.knowledge-page.dark .help-card{
+  background:#1E293B;
+}
+
+.help-card h3{
+  color:#2563EB;
+  font-size:24px;
+  margin-bottom:22px;
+}
+
+.help-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.help-item{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:#F8FAFC;
+  padding:18px;
+  border-radius:18px;
+  transition:.3s;
+}
+
+.help-item:hover{
+  transform:translateY(-4px);
+}
+
+.knowledge-page.dark .help-item{
+  background:#0F172A;
+}
+
+.help-item svg{
+  background:#EFF6FF;
+  padding:10px;
+  border-radius:50%;
+  width:52px;
+  height:52px;
+}
+
+.knowledge-page.dark .help-item svg{
+  background:#1E40AF;
+}
+
+.help-item h4{
+  font-size:17px;
+  margin-bottom:4px;
+  color:#1E293B;
+}
+
+.help-item p{
+  font-size:14px;
+  color:#64748B;
+}
+
+.knowledge-page.dark .help-item h4{
+  color:#fff;
+}
+
+.knowledge-page.dark .help-item p{
+  color:#CBD5E1;
+}
+
+/* ================= FLOAT ANIMATION ================= */
+
+.hero-icon svg{
+  animation:heartbeat 2.5s infinite ease-in-out;
+}
+
+@keyframes heartbeat{
+  0%{transform:scale(1);}
+  25%{transform:scale(1.08);}
+  50%{transform:scale(.95);}
+  75%{transform:scale(1.08);}
+  100%{transform:scale(1);}
+}
+
+.category-card,
+.nutrition-card,
+.medicine-card,
+.help-item,
+.tip-item,
+.disease-card{
+  transition:all .3s ease;
+}
+
+/* ================= CUSTOM SCROLLBAR ================= */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#E2E8F0;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#2563EB;
+  border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background:#1D4ED8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1024px){
+
+  .hero-banner{
+    padding:28px;
+  }
+
+  .hero-banner h1{
+    font-size:34px;
+  }
+
+  .disease-grid{
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  }
+
+}
+
+@media (max-width:768px){
+
+  .knowledge-page{
+    padding:18px;
+  }
+
+  .knowledge-header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .hero-banner{
+    flex-direction:column;
+    align-items:flex-start;
+    text-align:left;
+    padding:24px;
+  }
+
+  .hero-banner h1{
+    font-size:28px;
+  }
+
+  .hero-banner p{
+    font-size:15px;
+  }
+
+  .hero-icon{
+    width:120px;
+    height:120px;
+    align-self:center;
+  }
+
+  .hero-icon svg{
+    width:70px;
+    height:70px;
+  }
+
+  .search-box{
+    padding:14px;
+  }
+
+  .category-grid,
+  .emergency-grid,
+  .nutrition-grid,
+  .medicine-grid,
+  .tips-grid,
+  .help-grid{
+    grid-template-columns:1fr;
+  }
+
+  .disease-grid{
+    grid-template-columns:1fr;
+  }
+
+  .disease-image{
+    height:190px;
+  }
+
+  .info-box{
+    flex-direction:column;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .knowledge-page{
+    padding:14px;
+  }
+
+  .knowledge-header h2{
+    font-size:24px;
+  }
+
+  .section-title{
+    font-size:20px;
+  }
+
+  .hero-banner{
+    border-radius:20px;
+    padding:20px;
+  }
+
+  .hero-banner h1{
+    font-size:24px;
+  }
+
+  .hero-banner p{
+    font-size:14px;
+  }
+
+  .hero-btn{
+    width:100%;
+    justify-content:center;
+  }
+
+  .search-box input{
+    font-size:14px;
+  }
+
+  .category-card{
+    padding:18px;
+  }
+
+  .disease-body h3{
+    font-size:20px;
+  }
+
+  .disease-image{
+    height:170px;
+  }
+
+  .tips-card,
+  .help-card,
+  .women-card{
+    padding:20px;
+  }
+
+}
+
+/* ================= END OF FILE ================= */

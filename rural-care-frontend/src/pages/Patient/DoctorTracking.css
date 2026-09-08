@@ -1,0 +1,366 @@
+/* ===========================================
+   LIVE DOCTOR TRACKING (PATIENT)
+=========================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+.doctor-tracking-page{
+  min-height:100vh;
+  padding:24px;
+  background:#f3f8ff;
+  color:#111827;
+  font-family:Poppins,sans-serif;
+  transition:.3s;
+}
+
+.doctor-tracking-page.dark{
+  background:linear-gradient(135deg,#07111f,#0f172a,#111827);
+  color:white;
+}
+
+/* HEADER */
+
+.tracking-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:24px;
+}
+
+.tracking-header h2{
+  font-size:34px;
+  font-weight:700;
+}
+
+.tracking-header p{
+  margin-top:6px;
+  color:#64748b;
+}
+
+.doctor-tracking-page.dark .tracking-header p{
+  color:#CBD5E1;
+}
+
+.live-badge{
+  background:#EF4444;
+  color:white;
+  padding:8px 18px;
+  border-radius:999px;
+  font-weight:700;
+  font-size:13px;
+}
+
+/* MAP CARD */
+
+.map-card{
+  background:white;
+  border-radius:24px;
+  padding:18px;
+  box-shadow:0 15px 30px rgba(0,0,0,.08);
+  margin-bottom:28px;
+}
+
+.doctor-tracking-page.dark .map-card{
+  background:#111827;
+}
+
+/* MAP */
+
+.map-placeholder{
+  height:430px;
+  border-radius:20px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#dbeafe,#bfdbfe,#93c5fd);
+}
+
+/* Grid Roads */
+
+.map-placeholder::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:
+  linear-gradient(rgba(255,255,255,.4) 2px,transparent 2px),
+  linear-gradient(90deg,rgba(255,255,255,.4) 2px,transparent 2px);
+  background-size:60px 60px;
+  opacity:.35;
+}
+
+/* ROUTE */
+
+.route-line{
+  position:absolute;
+  left:25%;
+  top:60%;
+  width:52%;
+  height:4px;
+  background:#2563EB;
+  border-radius:10px;
+}
+
+/* DOCTOR */
+
+.doctor-marker{
+  position:absolute;
+  left:18%;
+  top:56%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  z-index:2;
+}
+
+.doctor-marker span{
+  background:#2563EB;
+  color:white;
+  padding:6px 14px;
+  border-radius:20px;
+  margin-top:6px;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* HOME */
+
+.home-marker{
+  position:absolute;
+  right:18%;
+  top:28%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  z-index:2;
+}
+
+.home-marker span{
+  background:#16A34A;
+  color:white;
+  padding:6px 14px;
+  border-radius:20px;
+  margin-top:6px;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* MOVING DOT */
+
+.moving-dot{
+  position:absolute;
+  left:32%;
+  top:58%;
+  width:14px;
+  height:14px;
+  background:#2563EB;
+  border-radius:50%;
+  animation:moveDoctor 6s infinite linear;
+}
+
+@keyframes moveDoctor{
+  0%{
+    left:32%;
+    top:58%;
+  }
+
+  50%{
+    left:55%;
+    top:48%;
+  }
+
+  100%{
+    left:74%;
+    top:36%;
+  }
+}
+
+/* MAP FOOTER */
+
+.map-footer{
+  display:flex;
+  justify-content:space-between;
+  margin-top:16px;
+}
+
+.footer-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:600;
+}
+
+/* STATUS CARD */
+
+.doctor-status-card{
+  background:white;
+  border-radius:24px;
+  padding:26px;
+  box-shadow:0 15px 30px rgba(0,0,0,.08);
+}
+
+.doctor-tracking-page.dark .doctor-status-card{
+  background:#111827;
+}
+
+.doctor-info{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-bottom:24px;
+}
+
+.doctor-info img{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  border:4px solid #16A34A;
+}
+
+.doctor-info h3{
+  font-size:24px;
+}
+
+.doctor-info p{
+  color:#64748B;
+  margin:5px 0;
+}
+
+.doctor-tracking-page.dark .doctor-info p{
+  color:#CBD5E1;
+}
+
+.status-live{
+  display:inline-block;
+  margin-top:6px;
+  background:#DCFCE7;
+  color:#16A34A;
+  padding:8px 16px;
+  border-radius:999px;
+  font-weight:700;
+}
+
+/* INFO GRID */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-bottom:26px;
+}
+
+.info-box{
+  background:#F8FAFC;
+  padding:18px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.doctor-tracking-page.dark .info-box{
+  background:#1F2937;
+}
+
+.info-box span{
+  font-size:13px;
+  color:#64748B;
+}
+
+.doctor-tracking-page.dark .info-box span{
+  color:#CBD5E1;
+}
+
+.info-box strong{
+  display:block;
+  margin-top:4px;
+}
+
+/* BUTTON */
+
+.call-btn{
+  width:100%;
+  padding:16px;
+  border:none;
+  border-radius:16px;
+  background:linear-gradient(90deg,#16A34A,#22C55E);
+  color:white;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+.call-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 25px rgba(22,163,74,.3);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+  .tracking-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+  }
+
+  .doctor-info{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .map-placeholder{
+    height:300px;
+  }
+
+  .route-line{
+    width:46%;
+  }
+}
+.leaflet-map{
+  width:100%;
+  height:450px;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.status-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:16px;
+  margin:24px 0;
+}
+
+.status-item{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background:#F8FAFC;
+  padding:18px;
+  border-radius:16px;
+}
+
+.dark .status-item{
+  background:#1F2937;
+}
+
+.status-item span{
+  color:#64748B;
+  font-size:13px;
+}
+
+.dark .status-item span{
+  color:#CBD5E1;
+}
+
+.status-item strong{
+  display:block;
+  margin-top:4px;
+}

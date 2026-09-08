@@ -1,0 +1,375 @@
+/* ==========================================
+   RURAL DOCTOR DASHBOARD - FINAL CSS
+   Dark Theme | Responsive | Industry UI
+========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #020617;
+  overflow-x: hidden;
+}
+
+/* ================= LAYOUT ================= */
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #020617, #0f172a, #111827);
+  color: white;
+}
+
+/* Sidebar width = 260px */
+.dashboard-main {
+  flex: 1;
+  margin-left: 260px;
+  width: calc(100% - 260px);
+  padding: 28px;
+  overflow-x: hidden;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 20px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.hero p {
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 620px;
+}
+
+.visit-btn {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.visit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+}
+
+/* ================= STATS ================= */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.stats-grid .stat-card {
+  background: linear-gradient(180deg, #111827, #1e293b);
+  border-radius: 20px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+}
+
+.stat-card h4 {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.stat-card h2 {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+/* ================= GRID ================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 22px;
+  align-items: start;
+}
+
+/* ================= REQUEST CARD ================= */
+
+.request-card {
+  background: #111827;
+  border-radius: 22px;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,.06);
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.request-header h2 {
+  color: white;
+  font-size: 28px;
+}
+
+.request-header span {
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+/* TABLE */
+
+.request-card table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.request-card th {
+  padding: 14px 10px;
+  text-align: left;
+  color: #94a3b8;
+  font-size: 14px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.request-card td {
+  padding: 16px 10px;
+  color: white;
+  border-bottom: 1px solid #1e293b;
+}
+
+.request-card tr:hover {
+  background: rgba(37, 99, 235, 0.08);
+}
+
+/* Priority */
+
+.priority {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.priority.emergency {
+  background: rgba(239, 68, 68, .18);
+  color: #f87171;
+}
+
+.priority.normal {
+  background: rgba(34, 197, 94, .15);
+  color: #4ade80;
+}
+
+/* Accept Reject */
+
+.action-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.accept,
+.reject {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+}
+
+.accept {
+  background: #16a34a;
+}
+
+.reject {
+  background: #dc2626;
+}
+
+.accept:hover {
+  background: #22c55e;
+}
+
+.reject:hover {
+  background: #ef4444;
+}
+
+/* ================= LIVE GPS CARD ================= */
+
+.tracking-card {
+  background: linear-gradient(180deg,#1d4ed8,#1e3a8a);
+  border-radius: 22px;
+  padding: 22px;
+  color: white;
+}
+
+.tracking-card h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.map-placeholder {
+  width: 100%;
+  height: 250px;
+  border-radius: 16px;
+  background: linear-gradient(135deg,#dbeafe,#bfdbfe);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1e40af;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.tracking-info {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+}
+
+.tracking-info div {
+  background: rgba(255,255,255,.08);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+.tracking-info span {
+  display: block;
+  color: #cbd5e1;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.tracking-info strong {
+  font-size: 16px;
+}
+
+/* ================= SEARCH BAR ================= */
+
+.search-box {
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 22px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 30px;
+  border: none;
+  background: #1e293b;
+  color: white;
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: #94a3b8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:1200px) {
+  .stats-grid {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width:992px) {
+
+  .dashboard-main {
+    margin-left: 90px;
+    width: calc(100% - 90px);
+    padding: 22px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width:768px) {
+
+  .dashboard-main {
+    margin-left: 0;
+    width: 100%;
+    padding: 18px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tracking-info {
+    grid-template-columns: 1fr;
+  }
+
+  .action-btns {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .visit-btn {
+    width: 100%;
+  }
+}
+/* ===== Top Right Profile + Logout ===== */
+
+.dashboard-top-actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+
+
+.logout-btn-small{
+  width:36px;
+  height:36px;
+  border:none;
+  border-radius:50%;
+  background:#EF4444;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.logout-btn-small:hover{
+  background:#DC2626;
+  transform:scale(1.08);
+}
+
+
+.dark .logout-btn-small{
+  background:#B91C1C;
+}

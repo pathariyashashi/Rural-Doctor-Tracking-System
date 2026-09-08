@@ -1,0 +1,146 @@
+.request-card{
+  background:var(--surface);
+  padding:22px;
+  border-radius:22px;
+  border:1px solid var(--border);
+}
+
+.request-header{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.request-header span{
+  color:#60A5FA;
+  font-weight:600;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td{
+  padding:16px;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+
+th{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.priority{
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.emergency{
+  background:#FEF2F2;
+  color:#DC2626;
+}
+
+.normal{
+  background:#EFF6FF;
+  color:#2563EB;
+}
+
+.action-btns{
+  display:flex;
+  gap:8px;
+}
+
+.accept{
+  background:#2563EB;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+}
+
+.reject{
+  background:#EF4444;
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:30px;
+}
+
+.accepted-text {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.rejected-text {
+  color: #dc2626;
+  font-weight: 700;
+}
+/* ===== Accept Location Button ===== */
+
+.action-btns{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.location-btn{
+  background:#16A34A;
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.location-btn:hover{
+  background:#15803D;
+  transform:scale(1.05);
+}
+.delete-btn{
+  background:#c96e6e;
+  color:white;
+  border:none;
+  padding:7px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+  transition:0.3s;
+}
+
+.delete-btn:hover{
+  background:#8a5d5d;
+  transform:scale(1.05);
+}
+.delete-btn{
+  width:34px;
+  height:34px;
+  border:none;
+  border-radius:8px;
+  background:#df6868;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.delete-btn:hover{
+  background:#ca9696;
+  transform:scale(1.05);
+}

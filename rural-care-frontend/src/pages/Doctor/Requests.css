@@ -1,0 +1,41 @@
+.request-page{
+  padding:20px;
+}
+
+.request-page h2{
+  color:#15803d;
+  margin-bottom:20px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:white;
+}
+
+th,td{
+  padding:12px;
+  border:1px solid #ddd;
+  text-align:center;
+}
+
+th{
+  background:#16a34a;
+  color:white;
+}
+
+.accept,.reject{
+  padding:8px 12px;
+  margin:4px;
+  border:none;
+  border-radius:6px;
+  color:white;
+}
+
+.accept{
+  background:#16a34a;
+}
+
+.reject{
+  background:#dc2626;
+}

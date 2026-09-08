@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap");
+
+*{
+  font-family:Poppins,sans-serif;
+}
+
+.login-page{
+  height:100vh;
+  background:url("/images/village-bg.jpg") center/cover;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+}
+
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(6,78,59,.55);
+}
+
+.login-container{
+  position:relative;
+  width:90%;
+  max-width:1050px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  background:white;
+  border-radius:25px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.left-panel{
+  background:#ECFDF5;
+  padding:60px 40px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.logo-box{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.left-panel h1{
+  color:#16A34A;
+}
+
+.left-panel h2{
+  margin:25px 0 10px;
+  color:#064E3B;
+}
+
+.left-panel p{
+  color:#475569;
+}
+
+.right-panel{
+  padding:50px 40px;
+}
+
+.right-panel h2{
+  color:#064E3B;
+  margin-bottom:25px;
+}
+
+.right-panel input{
+  width:100%;
+  padding:15px;
+  margin-bottom:15px;
+  border:1px solid #CBD5E1;
+  border-radius:12px;
+}
+
+.right-panel button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:12px;
+  color:white;
+  font-weight:600;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:12px;
+  cursor:pointer;
+}
+
+.doctor-btn{background:#16A34A;}
+.patient-btn{background:#2563EB;}
+
+.right-panel p{
+  margin-top:20px;
+  color:#16A34A;
+  text-align:center;
+  cursor:pointer;
+}
+
+@media(max-width:768px){
+  .login-container{grid-template-columns:1fr;}
+  .left-panel{display:none;}
+}
+/* ================= REGISTER BUTTONS ================= */
+
+.register-section{
+  margin-top:25px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.register-section p{
+  text-align:center;
+  color:#64748B;
+  font-weight:600;
+}
+
+.register-doctor-btn,
+.register-patient-btn{
+  width:100%;
+  padding:13px;
+  border:none;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:.3s;
+}
+
+.register-doctor-btn{
+  background:#1E3A8A;
+  color:white;
+}
+
+.register-doctor-btn:hover{
+  background:#163C9F;
+}
+
+.register-patient-btn{
+  background:#EFF6FF;
+  color:#1E3A8A;
+  border:2px solid #2563EB;
+}
+
+.register-patient-btn:hover{
+  background:#DBEAFE;
+}
+.register-section{
+  margin-top:20px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  width:100%;
+}
+
+.register-doctor-btn,
+.register-patient-btn{
+  width:100%;
+  height:48px;
+  border:none;
+  border-radius:12px;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+}
+
+.register-doctor-btn{
+  background:#1E3A8A;
+  color:#fff;
+}
+
+.register-patient-btn{
+  background:#2563EB;
+  color:#fff;
+}

@@ -1,0 +1,36 @@
+.stat-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+
+.stat-card::before{
+  content:"";
+  position:absolute;
+  top:-35px;
+  right:-35px;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#5B4DFF22,#00C2FF22);
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.top small{
+  color:var(--muted);
+}
+
+.stat-card h2{
+  margin-top:20px;
+  color:var(--text);
+  font-size:34px;
+}

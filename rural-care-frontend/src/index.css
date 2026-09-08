@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,sans-serif;
+  transition:.35s;
+}
+
+:root{
+  --bg:#F4F7FE;
+  --surface:#FFFFFF;
+  --sidebar:#FFFFFF;
+  --text:#111827;
+  --muted:#64748B;
+  --border:#E5E7EB;
+  --shadow:0 15px 30px rgba(0,0,0,.08);
+  --primary:#5B4DFF;
+  --secondary:#00C2FF;
+}
+
+body.dark{
+  --bg:#070B17;
+  --surface:rgba(18,24,44,.88);
+  --sidebar:#0B1020;
+  --text:#F8FAFC;
+  --muted:#94A3B8;
+  --border:rgba(255,255,255,.08);
+  --shadow:0 20px 40px rgba(0,0,0,.35);
+}
+
+body{
+  background:
+    radial-gradient(circle at top right,#4F46E522,transparent 30%),
+    radial-gradient(circle at bottom left,#06B6D422,transparent 35%),
+    var(--bg);
+  color:var(--text);
+}
+
+.card,.table-card,.tracking-card,.request-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(18px);
+  border-radius:22px;
+}
+
+button{
+  cursor:pointer;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+}

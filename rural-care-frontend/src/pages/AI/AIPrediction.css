@@ -1,0 +1,317 @@
+/* =========================================
+      AI DISEASE PREDICTION - FINAL UI
+========================================= */
+
+.ai-page{
+  min-height:100vh;
+  padding:28px;
+  background:#F4F8FF;
+  transition:.3s;
+}
+
+.ai-page.dark{
+  background:#0F172A;
+  color:white;
+}
+
+/* Header */
+
+.ai-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:28px;
+}
+
+.ai-header h2{
+  font-size:32px;
+}
+
+.ai-header p{
+  color:#64748B;
+}
+
+.ai-page.dark .ai-header p{
+  color:#CBD5E1;
+}
+
+.theme-btn{
+  width:46px;
+  height:46px;
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+/* Layout */
+
+.ai-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:24px;
+}
+
+/* Cards */
+
+.form-card,
+.result-card,
+.tips-card{
+  background:white;
+  padding:24px;
+  border-radius:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.ai-page.dark .form-card,
+.ai-page.dark .result-card,
+.ai-page.dark .tips-card{
+  background:#111827;
+}
+
+.title-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.form-card label{
+  display:block;
+  margin:14px 0 8px;
+  font-weight:600;
+}
+
+.form-card input,
+.form-card textarea{
+  width:100%;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #CBD5E1;
+  outline:none;
+  font-size:15px;
+}
+
+.ai-page.dark input,
+.ai-page.dark textarea{
+  background:#1E293B;
+  color:white;
+  border:none;
+}
+
+.predict-btn{
+  width:100%;
+  margin-top:20px;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#2563EB,#3B82F6);
+  color:white;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.predict-btn:hover{
+  transform:translateY(-2px);
+}
+
+/* Result */
+
+.empty-result{
+  text-align:center;
+  padding:40px 10px;
+}
+
+.result-card h1{
+  font-size:34px;
+  margin:16px 0;
+}
+
+.confidence{
+  margin-bottom:18px;
+  color:#2563EB;
+}
+
+.risk-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 16px;
+  border-radius:30px;
+  font-weight:700;
+}
+
+.high{
+  background:#FEE2E2;
+  color:#DC2626;
+}
+
+.medium{
+  background:#FEF3C7;
+  color:#D97706;
+}
+
+.low{
+  background:#DCFCE7;
+  color:#16A34A;
+}
+
+.recommend-box{
+  display:flex;
+  gap:14px;
+  padding:16px;
+  background:#F0FDF4;
+  border-radius:14px;
+  margin:18px 0;
+}
+
+.ai-page.dark .recommend-box{
+  background:#1F2937;
+}
+
+.precautions ul{
+  padding-left:18px;
+  margin-top:10px;
+}
+
+.precautions li{
+  margin:8px 0;
+}
+
+/* Tips */
+
+.tips-card{
+  margin-top:24px;
+}
+
+.tips-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:20px;
+}
+
+.tip-box{
+  background:#F8FAFC;
+  padding:18px;
+  border-radius:14px;
+}
+
+.ai-page.dark .tip-box{
+  background:#1E293B;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+  .ai-grid{
+    grid-template-columns:1fr;
+  }
+
+  .ai-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+  }
+
+  .theme-btn{
+    align-self:flex-end;
+  }
+
+}
+
+/* ===== Confidence ===== */
+
+.confidence-box{
+  margin:18px 0;
+}
+
+.confidence-header{
+  display:flex;
+  justify-content:space-between;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.progress{
+  width:100%;
+  height:12px;
+  background:#E5E7EB;
+  border-radius:30px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,#22C55E,#16A34A);
+}
+
+/* ===== Medicine ===== */
+
+.medicine-box{
+  margin-top:20px;
+  background:#FFF7ED;
+  padding:18px;
+  border-radius:14px;
+}
+
+.dark .medicine-box{
+  background:#3F2A14;
+}
+
+.medicine-item{
+  padding:8px 0;
+}
+
+/* ===== History ===== */
+
+.history-card{
+  margin-top:24px;
+  background:white;
+  padding:24px;
+  border-radius:18px;
+  box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.dark .history-card{
+  background:#111827;
+}
+
+.history-card table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:15px;
+}
+
+.history-card th{
+  background:#2563EB;
+  color:white;
+  padding:12px;
+}
+
+.history-card td{
+  padding:12px;
+  border-bottom:1px solid #E5E7EB;
+}
+
+.history-risk{
+  padding:5px 12px;
+  border-radius:20px;
+  font-weight:600;
+}
+
+.history-risk.high{
+  background:#FEE2E2;
+  color:#DC2626;
+}
+
+.history-risk.medium{
+  background:#FEF3C7;
+  color:#D97706;
+}
+
+.history-risk.low{
+  background:#DCFCE7;
+  color:#16A34A;
+}

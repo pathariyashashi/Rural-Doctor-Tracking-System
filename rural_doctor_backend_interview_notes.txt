@@ -1,0 +1,461 @@
+RURAL DOCTOR HOME VISIT SYSTEM Backend Interview + Learning Notes
+===================================
+
+1. PROJECT IDEA
+
+This project is a simple rural doctor home-visit management system.
+
+Real problem: - Doctor clinic par fixed time available nahi rehte. -
+Doctor ghar-ghar / village-to-village patients dekhte hain. - Patients
+ko pata nahi hota doctor abhi available hain ya home visit par hain. -
+Phone/network problem ke karan patient doctor se contact nahi kar
+pata. - Patient ghar par doctor ko bulane ke liye request karna chahta
+hai.
+
+Solution: Patient website par doctor ka status dekh sakta hai aur home
+visit request bhej sakta hai. Doctor dashboard se request
+accept/reject/complete kar sakta hai. AI patient ke written complaint ko
+short summary me convert karega.
+
+IMPORTANT: AI diagnosis ya prescription nahi karega. AI sirf information
+ko summarize/structure karega. Final medical decision doctor ka rahega.
+
+2. SIMPLE PROJECT FLOW
+
+Patient | v React Frontend | v FastAPI Backend | +—-> AI Service | v
+PostgreSQL Database | v Doctor Dashboard
+
+Example: Patient: “Mujhe 2 din se bukhar aur sar dard hai.” | v AI
+Summary: “Fever and headache for 2 days.” | v Doctor request dekhta hai
+| +–> Accept +–> Reject +–> Complete
+
+3. TECHNOLOGY STACK
+
+Frontend: - React
+
+Backend: - Python - FastAPI
+
+Database: - PostgreSQL - SQLAlchemy ORM
+
+Authentication: - JWT - Password hashing using bcrypt/passlib
+
+AI: - OpenAI API
+
+Configuration: - python-dotenv - pydantic-settings
+
+Testing: - FastAPI Swagger / OpenAPI - http://127.0.0.1:8000/docs
+
+Deployment: - Later Docker + cloud platform
+
+4. BACKEND FOLDER STRUCTURE
+
+rural-doctor-backend/ | ├── venv/ -> Python virtual environment | ├──
+app/ -> Main backend application │ | │ ├── init.py -> Python package
+marker │ ├── main.py -> FastAPI application entry point │ ├──
+database.py -> PostgreSQL/SQLAlchemy connection │ ├── config.py ->
+Environment/configuration settings │ | │ ├── models/ -> Database table
+definitions │ │ ├── init.py │ │ ├── user.py -> Users table │ │ ├──
+doctor.py -> Doctor table │ │ ├── patient.py -> Patient table │ │ └──
+visit.py -> Home visit/request table │ | │ ├── schemas/ -> API
+request/response validation │ │ ├── init.py │ │ ├── auth.py │ │ ├──
+doctor.py │ │ ├── patient.py │ │ └── visit.py │ | │ ├── routes/ -> API
+endpoints │ │ ├── init.py │ │ ├── auth.py -> Register/Login APIs │ │ ├──
+doctor.py -> Doctor APIs │ │ ├── patient.py -> Patient APIs │ │ └──
+visit.py -> Visit management APIs │ | │ └── services/ ->
+Business/external service logic │ ├── init.py │ └── ai_service.py -> AI
+integration | ├── .env -> Secrets/config values ├── .gitignore -> Files
+Git should ignore └── requirements.txt -> Python dependencies
+
+5. FOLDER VS FILE - INTERVIEW EXPLANATION
+
+app: Main application package. Backend ka saara code yahan organized
+hai.
+
+models: Database me data ka structure define karta hai.
+
+schemas: API se aane aur jaane wale data ko validate/shape karta hai.
+
+routes: HTTP endpoints/API URLs handle karta hai.
+
+services: Business logic aur external services (jaise AI) ko alag rakhta
+hai.
+
+models vs schemas: Models = Database structure. Schemas = API data
+structure/validation.
+
+routes vs services: Routes = request receive/response return. Services =
+actual business logic.
+
+6. CONFIG.PY
+
+Purpose: Environment variables ko application me safely load karna.
+
+Example: DATABASE_URL OPENAI_API_KEY
+
+Why? - Secrets code me hard-code nahi karne. - Development/production me
+settings easily change kar sakte hain. - API keys GitHub par
+accidentally expose nahi honi chahiye.
+
+Current idea:
+
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings): DATABASE_URL: str OPENAI_API_KEY: str = “”
+
+    class Config:
+        env_file = ".env"
+
+settings = Settings()
+
+7. .ENV
+
+Purpose: Secret/config values store karna.
+
+Example:
+
+DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/rural_doctor
+OPENAI_API_KEY=YOUR_KEY
+
+IMPORTANT: .env ko GitHub par push nahi karna. Isliye .gitignore me .env
+add kiya jata hai.
+
+8. DATABASE.PY
+
+Purpose: FastAPI ko PostgreSQL database se connect karna.
+
+Main concepts:
+
+engine: SQLAlchemy ka database connection/engine.
+
+SessionLocal: Database session create karta hai.
+
+Base: SQLAlchemy models isi Base se inherit karte hain.
+
+get_db(): API endpoint ko database session provide karta hai. Request
+complete hone ke baad session close karta hai.
+
+Typical flow:
+
+API Request | v get_db() | v SQLAlchemy Session | v PostgreSQL
+
+9. SQLALCHEMY KYUN?
+
+SQLAlchemy Python ka ORM (Object Relational Mapper) hai.
+
+ORM ka simple meaning: Python classes ko database tables ke saath map
+karna.
+
+Example:
+
+class User(Base): tablename = “users”
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+
+Ye database me users table represent kar sakta hai.
+
+Benefits: - Raw SQL kam likhna padta hai. - Python objects ke through
+database work kar sakte hain. - Relationships manage karna easy hota
+hai. - Project maintainable hota hai.
+
+10. DATABASE TABLES
+
+users: - id - name - phone - password - role
+
+doctor: - id - user_id - status - current_village
+
+patient: - id - user_id - village - address
+
+visits: - id - patient_id - doctor_id - problem - ai_summary - status -
+requested_at - visit_date
+
+11. TABLE RELATIONSHIPS
+
+One User can represent one Doctor or Patient account.
+
+Doctor and Patient are connected to User using user_id.
+
+Visit connects: Patient -> patient_id Doctor -> doctor_id
+
+Simple relationship:
+
+User | +—- Doctor | +—- Patient
+
+Patient + Doctor | v Visit
+
+12. API ROUTES
+
+Authentication: POST /auth/register POST /auth/login
+
+Doctor: GET /doctor/status PUT /doctor/status GET /doctor/requests PUT
+/doctor/requests/{id}
+
+Patient: POST /patient/home-visit GET /patient/requests GET
+/patient/requests/{id}
+
+Visit: PUT /visit/{id}/accept PUT /visit/{id}/reject PUT
+/visit/{id}/complete
+
+13. HTTP METHODS
+
+GET: Data read/fetch karna.
+
+POST: New data create karna.
+
+PUT: Existing data update karna.
+
+DELETE: Data delete karna.
+
+Example: POST /patient/home-visit = New home visit request create.
+
+PUT /doctor/status = Doctor ka current status update.
+
+14. SCHEMAS KYUN?
+
+FastAPI + Pydantic schemas input validation ke liye use hote hain.
+
+Example request:
+
+{ “name”: “Ramesh”, “village”: “Rampur”, “problem”: “Fever” }
+
+Schema check karega: - Required fields hain? - Data correct type ka
+hai? - Invalid input reject karna hai?
+
+Isse API safer aur predictable hoti hai.
+
+15. AUTHENTICATION
+
+Patient/Doctor login ke liye authentication.
+
+Basic flow:
+
+Register | v Password hash | v Database
+
+Login | v Password verify | v JWT token | v Protected API access
+
+IMPORTANT: Plain password database me save nahi karna. Password hashing
+use karna hai.
+
+JWT ka purpose: Server ko identify karne me help karta hai ki request
+kis authenticated user ki hai.
+
+16. DOCTOR STATUS
+
+Doctor ke simple statuses:
+
+available on_visit not_available
+
+Optional: current_village
+
+Example:
+
+status = “on_visit” current_village = “Rampur”
+
+Patient ko doctor ki availability samajh aati hai.
+
+17. HOME VISIT REQUEST
+
+Patient request:
+
+{ “problem”: “Mujhe bukhar hai”, “village”: “Rampur”, “address”: “Near
+school” }
+
+Backend: 1. Request validate karta hai. 2. AI summary create kar sakta
+hai. 3. Visit record database me save karta hai. 4. Status = pending. 5.
+Doctor request dekh sakta hai.
+
+18. VISIT STATUS
+
+pending: Doctor ne abhi decision nahi liya.
+
+accepted: Doctor ne visit accept ki.
+
+rejected: Doctor available nahi hai / request reject ki.
+
+completed: Visit complete ho gayi.
+
+19. AI INTEGRATION
+
+AI ka role intentionally simple hai.
+
+Input: “Mujhe 2 din se bukhar hai, body pain aur sar dard bhi hai.”
+
+AI output: “Fever, body pain and headache for 2 days.”
+
+Purpose: - Doctor ko quick summary dena. - Patient ki long complaint ko
+short structured information me convert karna.
+
+AI should NOT: - Diagnose disease. - Automatically prescribe medicine. -
+Replace doctor. - Make final medical decisions.
+
+Safe architecture:
+
+Patient complaint | v AI summary | v Doctor review | v Doctor final
+decision
+
+20. AI_SERVICE.PY
+
+Purpose: OpenAI API integration ko ek separate service me rakhna.
+
+Why separate file? - Route file clean rahegi. - AI logic reusable
+rahega. - Future me AI provider/model change karna easier hoga. -
+Testing easier hoti hai.
+
+Flow:
+
+routes/patient.py | v services/ai_service.py | v OpenAI API | v summary
+| v database
+
+21. MAIN.PY
+
+Purpose: FastAPI application create karna aur routes include karna.
+
+Basic idea:
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+Later: app.include_router(auth_router)
+app.include_router(patient_router) app.include_router(doctor_router)
+app.include_router(visit_router)
+
+main.py ko simple rakhna hai. Actual logic routes/services me rahega.
+
+22. FASTAPI SWAGGER
+
+FastAPI automatically API documentation provide karta hai.
+
+URL: http://127.0.0.1:8000/docs
+
+Yahan: - Endpoints dekh sakte hain. - Request body enter kar sakte
+hain. - API execute kar sakte hain. - Response dekh sakte hain.
+
+Interview me bol sakte ho: “FastAPI provides automatic OpenAPI/Swagger
+documentation, which I used to test and document the APIs.”
+
+23. REQUIREMENTS.TXT
+
+Purpose: Project ki Python dependencies list karna.
+
+Example libraries: fastapi uvicorn sqlalchemy psycopg2-binary
+python-dotenv pydantic-settings python-jose passlib openai
+
+A new developer requirements.txt ke through dependencies install kar
+sakta hai:
+
+pip install -r requirements.txt
+
+24. GITIGNORE
+
+Purpose: Sensitive/unnecessary files GitHub par push hone se rokna.
+
+Important entries:
+
+venv/ pycache/ *.pyc .env
+
+.env especially important because it can contain: - Database password -
+API keys - Secrets
+
+25. END-TO-END INTERVIEW ANSWER
+
+Question: “Explain your project architecture.”
+
+Answer:
+
+“I built a simple rural doctor home-visit management system using React,
+FastAPI and PostgreSQL. Patients can check the doctor’s availability and
+submit home-visit requests. The FastAPI backend handles authentication,
+validation, visit management and database operations using SQLAlchemy. I
+separated the project into models, schemas, routes and services for
+maintainability. I also integrated an AI service that summarizes the
+patient’s complaint for the doctor. The AI is not used for diagnosis or
+prescription; the final medical decision remains with the doctor.”
+
+26. WHY THIS ARCHITECTURE?
+
+Separation of concerns.
+
+models: Database responsibility.
+
+schemas: Validation responsibility.
+
+routes: API responsibility.
+
+services: Business/external service responsibility.
+
+database: Database connection responsibility.
+
+config: Configuration/secrets responsibility.
+
+This makes the project easier to: - Maintain - Test - Debug - Extend -
+Deploy
+
+27. CURRENT DEVELOPMENT ORDER
+
+1.  Project setup
+
+2.  Virtual environment
+
+3.  Install dependencies
+
+4.  FastAPI base
+
+5.  PostgreSQL connection
+
+6.  config.py
+
+7.  database.py
+
+8.  Models
+
+9.  Schemas
+
+10. Authentication
+
+11. Patient APIs
+
+12. Doctor APIs
+
+13. Visit APIs
+
+14. AI service
+
+15. Main route registration
+
+16. Swagger testing
+
+17. Error handling
+
+18. Security improvements
+
+19. Deployment
+
+20. INTERVIEW KEYWORDS TO REMEMBER
+
+    FastAPI REST API HTTP methods Pydantic SQLAlchemy ORM PostgreSQL JWT
+    Password hashing Environment variables OpenAI API Separation of
+    concerns CRUD Authentication Authorization API validation
+    Swagger/OpenAPI Database relationships Backend architecture Service
+    layer
+
+21. SIMPLE CRUD MEANING
+
+    Create = POST Read = GET Update = PUT/PATCH Delete = DELETE
+
+Example: Create visit -> POST Get visit -> GET Update visit status ->
+PUT Delete visit -> DELETE
+
+30. IMPORTANT PROJECT PRINCIPLE
+
+Build the simple working version first.
+
+Do NOT start with: - Complex GPS tracking - Live location - Payments -
+Voice assistant - Complex AI diagnosis - Unnecessary chatbot
+
+First make this work:
+
+Patient -> Request -> AI summary -> Database -> Doctor -> Accept/Reject
+-> Completed
+
+Then add advanced features only if needed.
