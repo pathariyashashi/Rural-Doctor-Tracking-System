@@ -15,55 +15,47 @@ from app.routes.ai_prediction import router as ai_router
 app = FastAPI(
     title="Rural Doctor Home Visit API",
     description="Backend API for Rural Doctor Home Visit Management",
-    version="1.0.0",
+    version="1.0.0"
 )
 
-# Upload folder
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
-# ===================== CORS (FINAL FIX) =====================
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        "https://rural-doctor.vercel.app",  # Vercel frontend
+        "https://rural-doctor.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-# ===========================================================
 
-# Create Tables
 Base.metadata.create_all(bind=engine)
 
-# Routers
 app.include_router(auth_router)
 app.include_router(doctor_router)
 app.include_router(patient_router)
 app.include_router(ai_router)
 
-
 @app.get("/")
 def root():
-    return {"message": "Rural Doctor API is running 🚑"}
-
+    return {"message": "Rural Doctor API is running"}
 
 @app.get("/health")
 def health_check():
     try:
         with engine.connect() as connection:
             connection.execute(text("SELECT 1"))
-
         return {
             "status": "healthy",
-            "database": "connected",
+            "database": "connected"
         }
-
     except Exception as e:
         return {
             "status": "unhealthy",
             "database": "disconnected",
-            "error": str(e),
+            "error": str(e)
         }
