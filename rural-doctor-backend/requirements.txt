@@ -25,6 +25,7 @@ pydantic-settings==2.15.0
 pydantic_core==2.46.4
 python-dotenv==1.2.2
 python-jose==3.5.0
+python-multipart==0.0.20
 rsa==4.9.1
 six==1.17.0
 sniffio==1.3.1
