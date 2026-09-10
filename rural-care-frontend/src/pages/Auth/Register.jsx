@@ -1,8 +1,7 @@
 import "./Register.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerPatient, registerDoctor } from "../../services/authAPI";
-
+import { registerUser } from "../../services/authAPI";
 export default function Register()  {
   const navigate = useNavigate();
   const [form, setForm] = useState({
@@ -83,27 +82,26 @@ const [role, setRole] = useState("patient");
 
         <button
   onClick={async () => {
-    if (!/^[6-9]\d{9}$/.test(form.phone)) {
-  alert("Enter a valid 10-digit Indian mobile number");
-  return;
-}
+  if (!/^[6-9]\d{9}$/.test(form.phone)) {
+    alert("Enter a valid 10-digit Indian mobile number");
+    return;
+  }
 
-    try {
-      if (role === "patient") {
-  await registerPatient(form);
-} else {
-  await registerDoctor(form);
-}
+  try {
+    await registerUser({
+      ...form,
+      role, // patient or doctor
+    });
 
-      alert(
-        `${role === "doctor" ? "Doctor" : "Patient"} Registered Successfully ✅`
-      );
+    alert(
+      `${role === "doctor" ? "Doctor" : "Patient"} Registered Successfully ✅`
+    );
 
-      navigate("/");
-    } catch (err) {
-      alert(err.response?.data?.detail || "Registration Failed ❌");
-    }
-  }}
+    navigate("/");
+  } catch (err) {
+    alert(err.response?.data?.detail || "Registration Failed ❌");
+  }
+}}
 >
   Register as {role === "doctor" ? "Doctor" : "Patient"}
 </button>
