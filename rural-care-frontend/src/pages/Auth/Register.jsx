@@ -1,7 +1,7 @@
 import "./Register.css";
 import { useState } from "react";
-import { registerUser } from "../../services/authAPI";
 import { useNavigate } from "react-router-dom";
+import { registerPatient, registerDoctor } from "../../services/authAPI";
 
 export default function Register()  {
   const navigate = useNavigate();
@@ -89,10 +89,11 @@ const [role, setRole] = useState("patient");
 }
 
     try {
-      await registerUser({
-        ...form,
-        role, // doctor ya patient automatically
-      });
+      if (role === "patient") {
+  await registerPatient(form);
+} else {
+  await registerDoctor(form);
+}
 
       alert(
         `${role === "doctor" ? "Doctor" : "Patient"} Registered Successfully ✅`
