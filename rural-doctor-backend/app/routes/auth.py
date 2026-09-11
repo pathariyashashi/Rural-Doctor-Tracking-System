@@ -45,13 +45,7 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
         if data.role == "patient":
          patient = Patient(
              user_id=new_user.id,
-            age=25,
-            village=data.village,
-            gender="Male",
-            blood_group="O+",
-            weight=60,
-            height=170,
-            allergy="No Allergy"
+            
          )
          db.add(patient)
 
