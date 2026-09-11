@@ -44,9 +44,10 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
         # Create Patient Profile
         if data.role == "patient":
          patient = Patient(
-             user_id=new_user.id,
-            
-         )
+        user_id=new_user.id,
+        area=data.village,              # Required field
+        address=f"{data.village}, India"  # Required field
+    )
          db.add(patient)
 
         # Create Doctor Profile
