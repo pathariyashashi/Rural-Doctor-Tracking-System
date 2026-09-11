@@ -5,24 +5,17 @@ from datetime import datetime, timedelta
 SECRET_KEY = "RuralDoctorSecret2026"
 ALGORITHM = "HS256"
 
+# FINAL FIX
 pwd_context = CryptContext(
-    schemes=["bcrypt"],
+    schemes=["bcrypt_sha256"],
     deprecated="auto"
 )
 
-# -------- Password Hash --------
-
 def hash_password(password: str):
-    password = password.strip()[:72]   # bcrypt max 72 bytes
-    return pwd_context.hash(password)
-
-# -------- Password Verify --------
+    return pwd_context.hash(password.strip())
 
 def verify_password(plain_password: str, hashed_password: str):
-    plain_password = plain_password.strip()[:72]
-    return pwd_context.verify(plain_password, hashed_password)
-
-# -------- JWT Token --------
+    return pwd_context.verify(plain_password.strip(), hashed_password)
 
 def create_access_token(data: dict):
     to_encode = data.copy()
