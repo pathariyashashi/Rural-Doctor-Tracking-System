@@ -43,13 +43,17 @@ def register(data: RegisterRequest, db: Session = Depends(get_db)):
 
         # Create Patient Profile
         if data.role == "patient":
-            patient = Patient(
-                user_id=new_user.id,
-                name=data.name,
-                age=25,
-                village=data.village
-            )
-            db.add(patient)
+         patient = Patient(
+             user_id=new_user.id,
+            age=25,
+            village=data.village,
+            gender="Male",
+            blood_group="O+",
+            weight=60,
+            height=170,
+            allergy="No Allergy"
+         )
+         db.add(patient)
 
         # Create Doctor Profile
         elif data.role == "doctor":
