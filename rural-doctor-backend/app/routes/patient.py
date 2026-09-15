@@ -36,14 +36,14 @@ def get_doctor_for_patient(
 
 
 # ================= HOME VISIT REQUEST + PATIENT GPS =================
-@router.post("/home-visit/{patient_id}/{doctor_id}")
+@router.post("/request-home-visit/{patient_id}/{doctor_id}")
 def request_home_visit(
     patient_id: int,
     doctor_id: int,
     data: VisitRequest,
     db: Session = Depends(get_db)
 ):
-    patient = db.query(Patient).filter(Patient.id == patient_id).first()
+    patient = db.query(Patient).filter(Patient.user_id == patient_id).first()
 
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
@@ -126,12 +126,14 @@ def get_visit_status(
 
 
 # ================= PATIENT DASHBOARD =================
+# ================= PATIENT DASHBOARD =================
 @router.get("/dashboard/{patient_id}")
 def patient_dashboard(
     patient_id: int,
     db: Session = Depends(get_db)
 ):
-    patient = db.query(Patient).filter(Patient.id == patient_id).first()
+    # Login ke user_id se patient nikalo
+    patient = db.query(Patient).filter(Patient.user_id == patient_id).first()
 
     if not patient:
         raise HTTPException(status_code=404, detail="Patient not found")
@@ -140,38 +142,46 @@ def patient_dashboard(
 
     visits = (
         db.query(Visit)
-        .filter(Visit.patient_id == patient_id)
+        .filter(Visit.patient_id == patient.id)
         .order_by(Visit.id.desc())
         .all()
     )
 
     return {
-     "patient": {
-        "id": patient.id,
-        "name": patient.name,
-        "age": patient.age,
-        "village": patient.village,
-        "phone": patient.phone,
-        "gender": patient.gender,
-        "blood_group": patient.blood_group,
-        "weight": patient.weight,
-        "height": patient.height,
-    },
+        "patient": {
+            "id": patient.id,
+            "user_id": patient.user_id,
+            "name": patient.name,
+            "age": patient.age,
+            "village": patient.village,
+            "phone": patient.phone,
+            "gender": patient.gender,
+            "blood_group": patient.blood_group,
+            "weight": patient.weight,
+            "height": patient.height,
+            "address": patient.address,
+        },
 
-    "doctor": {
-        "name": doctor.user.name if doctor else "Dr. Rajesh Kumar",
-        "phone": doctor.phone if doctor else "9876543210",
-        "status": doctor.status if doctor else "Available",
-        "specialization": doctor.specialization if doctor else "MBBS",
-    },
+        # ⭐ IMPORTANT (doctor id return karo)
+        "doctor": {
+            "id": doctor.id if doctor else None,
+            "name": doctor.user.name if doctor else "Dr. Rajesh Kumar",
+            "phone": doctor.phone if doctor else "9876543210",
+            "status": doctor.status if doctor else "Available",
+            "specialization": doctor.specialization if doctor else "MBBS",
+            "latitude": doctor.latitude if doctor else 0,
+            "longitude": doctor.longitude if doctor else 0,
+            "current_area": doctor.current_area if doctor else "",
+            "photo": doctor.photo if doctor else "",
+        },
 
-    "visits": [
-        {
-            "id": v.id,
-            "problem": v.problem,
-            "status": v.status,
-            "date": str(v.requested_at.date()),
-        }
-        for v in visits
-    ],
-}
+        "visits": [
+            {
+                "id": v.id,
+                "problem": v.problem,
+                "status": v.status,
+                "date": str(v.requested_at.date()),
+            }
+            for v in visits
+        ],
+    }
