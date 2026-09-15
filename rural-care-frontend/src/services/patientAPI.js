@@ -8,7 +8,7 @@ export const getDoctorForPatient = async (doctorId) => {
 // Home Visit
 // ✅ FINAL
 export const requestHomeVisit = (patientId, doctorId, data) =>
-  api.post(`/patient/home-visit/${patientId}/${doctorId}`, data);
+  api.post(`/patient/request-home-visit/${patientId}/${doctorId}`, data);
 
 // Visit Status
 export const getVisitStatus = async (visitId) => {
