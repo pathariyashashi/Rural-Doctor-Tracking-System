@@ -109,27 +109,25 @@ useEffect(() => {
 
  // ================= LIVE DOCTOR LOCATION =================
 useEffect(() => {
-  // ✅ Doctor ID nahi hai to API call mat karo
-  if (!doctorId) return;
+  if (!doctorId) return; // doctor null ho to API call mat karo
 
   const fetchDoctorLocation = async () => {
     try {
       const res = await getDoctorForPatient(doctorId);
-
+      if (!data) return;
       setDoctorLocation({
-        latitude: res.data.latitude || 0,
-        longitude: res.data.longitude || 0,
-        status: res.data.status || "On The Way",
-      });
-    } catch (error) {
-      console.log("Doctor Location Error:", error);
+  latitude: data.latitude || 0,
+  longitude: data.longitude || 0,
+  status: data.status || "On The Way",
+});
+    } catch (err) {
+      console.log("Doctor Location Error:", err.response?.data || err);
     }
   };
 
   fetchDoctorLocation();
 
   const interval = setInterval(fetchDoctorLocation, 5000);
-
   return () => clearInterval(interval);
 }, [doctorId]);
 

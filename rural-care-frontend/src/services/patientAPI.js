@@ -1,21 +1,25 @@
 import api from "./api";
 
-// Patient Dashboard
-export const getDoctorForPatient = async (doctorId) => {
-  return await api.get(`/patient/doctor/${doctorId}`);
+// ================= PATIENT DASHBOARD =================
+export const getPatientDashboard = async (patientId) => {
+  const res = await api.get(`/patient/dashboard/${patientId}`);
+  return res.data;
 };
 
-// Home Visit
-// ✅ FINAL
+// ================= HOME VISIT REQUEST =================
 export const requestHomeVisit = (patientId, doctorId, data) =>
   api.post(`/patient/request-home-visit/${patientId}/${doctorId}`, data);
 
-// Visit Status
-export const getVisitStatus = async (visitId) => {
-  return await api.get(`/patient/visit-status/${visitId}`);
+// ================= DOCTOR LIVE LOCATION =================
+export const getDoctorForPatient = async (doctorId) => {
+  if (!doctorId) return null; // doctorId null ho to API call hi mat karo
+
+  const res = await api.get(`/patient/doctor-location/${doctorId}`);
+  return res.data;
 };
 
-export const getPatientDashboard = async (patientId = 1) => {
-  const res = await api.get(`/patient/dashboard/${patientId}`);
+// ================= VISIT STATUS =================
+export const getVisitStatus = async (visitId) => {
+  const res = await api.get(`/patient/visit-status/${visitId}`);
   return res.data;
 };
