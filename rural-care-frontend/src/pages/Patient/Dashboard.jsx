@@ -107,27 +107,31 @@ useEffect(() => {
   );
 };
 
- useEffect(() => {
-    const fetchDoctorLocation = async () => {
-      try {
-        const res = await getDoctorForPatient(doctorId);
+ // ================= LIVE DOCTOR LOCATION =================
+useEffect(() => {
+  // ✅ Doctor ID nahi hai to API call mat karo
+  if (!doctorId) return;
 
-        setDoctorLocation({
-          latitude: res.data.latitude || 0,
-          longitude: res.data.longitude || 0,
-          status: res.data.status || "On The Way",
-        });
-      } catch (error) {
-        console.log("Doctor Location Error:", error);
-      }
-    };
+  const fetchDoctorLocation = async () => {
+    try {
+      const res = await getDoctorForPatient(doctorId);
 
-    fetchDoctorLocation();
+      setDoctorLocation({
+        latitude: res.data.latitude || 0,
+        longitude: res.data.longitude || 0,
+        status: res.data.status || "On The Way",
+      });
+    } catch (error) {
+      console.log("Doctor Location Error:", error);
+    }
+  };
 
-    const interval = setInterval(fetchDoctorLocation, 5000);
+  fetchDoctorLocation();
 
-    return () => clearInterval(interval);
-  }, [doctorId]);
+  const interval = setInterval(fetchDoctorLocation, 5000);
+
+  return () => clearInterval(interval);
+}, [doctorId]);
 
   return (
     <div className={dark ? "patient-dashboard dark" : "patient-dashboard"}>
