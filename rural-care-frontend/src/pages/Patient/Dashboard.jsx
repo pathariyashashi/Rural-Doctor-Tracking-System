@@ -33,11 +33,14 @@ export default function PatientDashboard() {
 };
   const { dark, setDark } = useTheme();
 
-  const patientId = 1;
-  const doctorId = 1;
+  // Logged-in user
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
+// Real patient ID after login
+  const patientId = Number(user?.id);
+  
   const [requestSent, setRequestSent] = useState(false);
-
+  const [doctorId, setDoctorId] = useState(null);
   const [patient, setPatient] = useState({});
   const [doctor, setDoctor] = useState({});
   const [visits, setVisits] = useState([]);
@@ -49,21 +52,28 @@ export default function PatientDashboard() {
   });
 
   // ================= LOAD DASHBOARD =================
-  useEffect(() => {
-    loadDashboard();
-  }, []);
-
+  // ================= LOAD DASHBOARD =================
+useEffect(() => {
   const loadDashboard = async () => {
     try {
-      const data = await getPatientDashboard(patientId);
+      const res = await getPatientDashboard(patientId);
+      const data = res.data || res;
 
-      if (data.patient) setPatient(data.patient);
-      if (data.doctor) setDoctor(data.doctor);
-      if (data.visits) setVisits(data.visits);
+      setPatient(data.patient || {});
+      setDoctor(data.doctor || {});
+      setVisits(data.visits || []);
+
+      if (data.doctor?.id) {
+        setDoctorId(data.doctor.id);
+      }
     } catch (error) {
       console.log("Dashboard Load Error:", error);
     }
   };
+
+  loadDashboard(); // ✅ Missing function call
+
+}, [patientId]); // ✅ Missing closing ) and dependency
 
   // ================= LIVE DOCTOR LOCATION =================
  
@@ -184,7 +194,7 @@ export default function PatientDashboard() {
 >
   {patient.photo ? (
     <img
-      src={`http://127.0.0.1:8000${patient.photo}`}
+      src={`https://rural-doctor-api.onrender.com${patient.photo}`}
       alt="profile"
       className="profile-avatar-nav"
     />
@@ -293,7 +303,7 @@ export default function PatientDashboard() {
           <img
             src={
               doctor.photo
-                ? `http://127.0.0.1:8000${doctor.photo}`
+                ? `https://rural-doctor-api.onrender.com${doctor.photo}`
                 : "https://i.pravatar.cc/120?img=12"
             }
             alt="doctor"
